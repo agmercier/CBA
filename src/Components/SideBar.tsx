@@ -32,7 +32,7 @@ const SideBar = ({ onSelectOption }: Props) => {
               onClick={() => onSelectOption(op.name)}
               textAlign={"left"}
               whiteSpace={"normal"}
-              fontSize={"lg"}
+              fontSize={"xl"}
               variant={"link"}
             >
               {op.name}

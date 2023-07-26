@@ -28,7 +28,7 @@ const NodeForm = ({ node }: Props) => {
   return (
     <aside color="black">
       <VStack>
-        <Heading marginBottom={4}>{node?.data.label} Parameters:</Heading>
+        <Heading marginBottom={4}>{node?.data.label} parameters:</Heading>
         {form?.params.map((param) =>
           typeof param.value === "string" ? (
             <Box key={param.key} marginBottom={4}>

@@ -1,9 +1,13 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import useProjects from "../hooks/useProjects";
+import useProjects, { Project } from "../../hooks/useProjects";
 import ProjectCardContainer from "./ProjectCardContainer";
 import ProjectCard from "./ProjectCard";
 
-const ProjectGrid = () => {
+interface Props {
+  setCurrentProject: (project: Project) => void;
+}
+
+const ProjectGrid = ({ setCurrentProject }: Props) => {
   const { data, error, isLoading } = useProjects();
   return (
     <SimpleGrid
@@ -13,7 +17,10 @@ const ProjectGrid = () => {
     >
       {data.map((project) => (
         <ProjectCardContainer key={project.id}>
-          <ProjectCard project={project} />
+          <ProjectCard
+            project={project}
+            setCurrentProject={setCurrentProject}
+          />
         </ProjectCardContainer>
       ))}
     </SimpleGrid>

@@ -1,3 +1,70 @@
 form {
     width: 100%
 }
+
+.flow {
+    flex-direction: column;
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+  }
+  
+  .flow aside {
+   border-right: 1px solid #000000;
+    padding: 15px 10px;
+    font-size: 12px;
+  }
+  
+  .flow aside .description {
+    margin-bottom: 10px;
+  }
+  
+  .flow .node {
+    height: 40px;
+    width: 120px;
+    padding: 4px;
+    border: 3px solid #1a192b;
+    background-color: #202020;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+  }
+  
+  .flow .node.data {
+    border-color: rgb(148, 177, 17);
+  }
+  .flow .node.model {
+    border-color: #ffafcc;
+  }
+  .flow .node.attack {
+    border-color: #f15353;
+  }
+  .flow .node.defence {
+    border-color: #3869d4;
+  }
+  .flow .node.result {
+    border-color: #a2d2ff;
+  }
+  
+  .flow .reactflow-wrapper {
+    flex-grow: 1;
+    height: 100%;
+  }
+  
+  .flow .selectall {
+    margin-top: 10px;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .flow {
+      flex-direction: row;
+    }
+  
+    .flow aside {
+      width: 20%;
+      max-width: 250px;
+    }
+  }
+  

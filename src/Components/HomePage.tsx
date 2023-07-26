@@ -7,14 +7,16 @@ import {
   IconButton,
   Show,
 } from "@chakra-ui/react";
-import ProjectGrid from "./ProjectGrid";
-import NavBar from "./Nav/NavBar";
-import SideBar from "./SideBar";
-import FilterSelector from "./FilterSelector";
-import OrderSelector from "./OrderSelector";
+import ProjectGrid from "./HomePageComponents/ProjectGrid";
+import NavBar from "./HomePageComponents/Nav/NavBar";
+import SideBar from "./HomePageComponents/SideBar";
+import FilterSelector from "./HomePageComponents/FilterSelector";
+import OrderSelector from "./HomePageComponents/OrderSelector";
 import { BsGrid3X2Gap, BsListStars } from "react-icons/bs";
 import { useState } from "react";
-import ProjectList from "./ProjectList";
+import ProjectList from "./HomePageComponents/ProjectList";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
+import { Project } from "../hooks/useProjects";
 
 /*
 Cut page into two sections: nav [logo, searchBar, help, settings, profile], aside [new project, home, recent, favorite, trash], main [(Recent projects), filters, all projects]
@@ -23,9 +25,14 @@ Cut page into two sections: nav [logo, searchBar, help, settings, profile], asid
 interface ProjectQuery {
   filter: string;
   order: string;
+  increasing: boolean;
 }
 
-const HomePage = () => {
+interface Props {
+  setCurrentProject: (project: Project) => void;
+}
+
+const HomePage = ({ setCurrentProject }: Props) => {
   const [projectQuery, setProjectQuery] = useState<ProjectQuery>(
     {} as ProjectQuery
   );
@@ -72,6 +79,22 @@ const HomePage = () => {
                 }
                 selectedOrder={projectQuery.order}
               />
+              <IconButton
+                icon={
+                  projectQuery.increasing ? (
+                    <AiOutlineArrowDown />
+                  ) : (
+                    <AiOutlineArrowUp />
+                  )
+                }
+                aria-label={"viewSwitch"}
+                onClick={() =>
+                  setProjectQuery({
+                    ...projectQuery,
+                    increasing: !projectQuery.increasing,
+                  })
+                }
+              ></IconButton>
             </HStack>
             <IconButton
               icon={gridView ? <BsListStars /> : <BsGrid3X2Gap />}
@@ -80,7 +103,11 @@ const HomePage = () => {
             ></IconButton>
           </HStack>
         </Box>
-        {gridView ? <ProjectGrid /> : <ProjectList />}
+        {gridView ? (
+          <ProjectGrid setCurrentProject={setCurrentProject} />
+        ) : (
+          <ProjectList setCurrentProject={setCurrentProject} />
+        )}
       </GridItem>
     </Grid>
   );

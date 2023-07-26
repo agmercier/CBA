@@ -1,5 +1,5 @@
 import { Button, HStack, IconButton, Image } from "@chakra-ui/react";
-import placeHolderImage from "../../assets/no-image-placeholder-6f3882e0.webp";
+import placeHolderImage from "../../../assets/logo_place_holder_copped1.jpg";
 import SearchInput from "./SearchInput";
 import { IoMdSettings } from "react-icons/io";
 import { BiSolidHelpCircle } from "react-icons/bi";

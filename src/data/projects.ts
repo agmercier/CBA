@@ -1,7 +1,7 @@
 export default [
   {
     id: 0,
-    name: "My First Project",
+    name: "My's First Project",
     date: new Date("2020-03-20"),
     favorite: false,
   },

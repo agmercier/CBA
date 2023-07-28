@@ -18,19 +18,12 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import NodeBar from "./NodeBar";
-import DataNode from "./Nodes/DataNode";
-import ModelNode from "./Nodes/ModelNode";
-import ResultNode from "./Nodes/ResultNode";
-import AttackNode from "./Nodes/AttackNode";
-import DefenceNode from "./Nodes/DefenceNode";
 import NodeForm from "./NodeForm";
+import useNodeTypes from "../../../hooks/useNodeTypes";
+import DynamicNode from "./DynamicNode";
 
 const nodeTypes = {
-  data: DataNode,
-  model: ModelNode,
-  result: ResultNode,
-  attack: AttackNode,
-  defence: DefenceNode,
+  dynamic: DynamicNode,
 };
 
 const initialNodes: Node[] = [];
@@ -41,6 +34,8 @@ const getId = () => `node_${id++}`;
 
 const FlowChart = () => {
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
+
+  const { data, isLoading, error } = useNodeTypes();
 
   //list of stored nodes and edges
   const [nodes, setNodes] = useState(initialNodes);
@@ -93,12 +88,14 @@ const FlowChart = () => {
       const reactFlowBounds =
         reactFlowWrapper.current?.getBoundingClientRect() || null;
 
-      const type = event.dataTransfer.getData("application/reactflow");
+      const slug = event.dataTransfer.getData("application/reactflow");
 
       // check if the dropped element is valid
-      if (typeof type === "undefined" || !type) {
+      if (typeof slug === "undefined" || !slug) {
         return;
       }
+
+      const nodeCategory = data.find((cat) => cat.slug === slug);
 
       const position = reactFlowInstance?.project({
         x: event.clientX - (reactFlowBounds?.left || 0),
@@ -107,9 +104,9 @@ const FlowChart = () => {
 
       const newNode = {
         id: getId(),
-        type,
+        type: "dynamic",
         position,
-        data: { label: `${type} node` },
+        data: { label: `${nodeCategory?.type} node`, nodeType: nodeCategory },
       };
 
       setNodes((nds) => nds.concat(newNode));

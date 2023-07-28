@@ -1,27 +1,27 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { Handle, Position } from "reactflow";
+import { NodeType } from "../../../hooks/useNodeTypes";
 
 interface Props {
-  data: {};
+  data: { lable: string; nodeType: NodeType };
   isConnectable: boolean;
 }
-
-const DataNode = ({ data, isConnectable }: Props) => {
+const DynamicNode = ({ data, isConnectable }: Props) => {
   return (
-    <Box className="node data">
+    <Box className={"node " + data.nodeType.type}>
       <Handle
         id="a"
-        type="source"
+        type="target"
         position={Position.Top}
         isConnectable={isConnectable}
       />
       <Handle
         id="b"
-        type="source"
+        type="target"
         position={Position.Left}
         isConnectable={isConnectable}
       />
-      <Heading size={"md"}>Data</Heading>
+      <Heading size={"md"}>{data.nodeType.lable}</Heading>
       <Handle
         type="source"
         position={Position.Right}
@@ -38,4 +38,4 @@ const DataNode = ({ data, isConnectable }: Props) => {
   );
 };
 
-export default DataNode;
+export default DynamicNode;

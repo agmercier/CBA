@@ -1,3 +1,4 @@
+import { Node, Edge } from "reactflow";
 import projects from "../data/projects";
 
 export interface Project {
@@ -5,6 +6,10 @@ export interface Project {
   name: string;
   date: Date;
   favorite: boolean;
+  flowchart?: {
+    nodes: Node[];
+    edges: Edge[];
+  };
 }
 
 const useProjects = () => {

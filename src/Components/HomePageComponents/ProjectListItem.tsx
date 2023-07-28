@@ -1,4 +1,4 @@
-import { Box, HStack, Heading, ListItem } from "@chakra-ui/react";
+import { Box, HStack, Heading, IconButton, ListItem } from "@chakra-ui/react";
 import { Project } from "../../hooks/useProjects";
 import FileOptions from "./FileOptions";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -28,7 +28,13 @@ const ProjectListItem = ({
           </Box>
           <Box width={columns_width[2]}>
             <HStack justifyContent={"space-between"}>
-              {project.favorite ? <AiFillStar /> : <AiOutlineStar />}
+              {
+                <IconButton
+                  aria-label="Search database"
+                  onClick={() => console.log("change favorite to: " + !project)}
+                  icon={project.favorite ? <AiFillStar /> : <AiOutlineStar />}
+                />
+              }
               <FileOptions />
             </HStack>
           </Box>

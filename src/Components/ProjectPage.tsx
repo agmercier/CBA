@@ -3,6 +3,10 @@ import TopBar from "./ProjectPageComponents/TopBar";
 import FlowChart from "./ProjectPageComponents/FlowChart/FlowChart";
 import { Project } from "../hooks/useProjects";
 
+/**
+ * ProjectPage divided into the top bar and flowchart
+ */
+
 interface Props {
   project: Project;
   goHomePage: () => void;

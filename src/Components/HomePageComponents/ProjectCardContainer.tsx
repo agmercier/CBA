@@ -1,6 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
+/* Set size of card */
+
 interface Props {
   children: ReactNode;
 }

@@ -6,12 +6,18 @@ import { CgProfile } from "react-icons/cg";
 import { BsChevronDown } from "react-icons/bs";
 import DropdownMenu from "./DropdownMenu";
 
+/**
+ * Top bar with project managment options
+ * logo, file, edit, view, run, project title, help, settings, profile
+ */
+
 interface Props {
   projectName: string;
   goHomePage: () => void;
 }
 
 const TopBar = ({ projectName, goHomePage }: Props) => {
+  //Objects holding info for the different drop down menu's
   const fileMenu = {
     lable: "File",
     options: [

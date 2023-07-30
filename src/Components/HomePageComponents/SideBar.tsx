@@ -1,13 +1,18 @@
-import { Button, HStack, Image, List, ListItem } from "@chakra-ui/react";
+import { Button, List, ListItem } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiFillHome, AiFillStar } from "react-icons/ai";
 import { FaClockRotateLeft, FaTrash } from "react-icons/fa6";
+
+/**
+ * Bar on the left side of the HomePage, includes: 'New' button, a list of options to select
+ */
 
 interface Props {
   onSelectOption: (option: string) => void;
 }
 
 const SideBar = ({ onSelectOption }: Props) => {
+  //The different options listed in the sidebar. Add an object to the list and it will be added to the sidebar
   const options = [
     { name: "Home", icon: AiFillHome },
     { name: "Recent", icon: FaClockRotateLeft },
@@ -16,7 +21,7 @@ const SideBar = ({ onSelectOption }: Props) => {
   ];
   return (
     <>
-      <Button
+      <Button //create a new project (TODO)
         leftIcon={<AiOutlinePlus />}
         size={"lg"}
         fontSize={"2xl"}

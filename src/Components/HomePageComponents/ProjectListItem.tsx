@@ -3,13 +3,18 @@ import { Project } from "../../hooks/useProjects";
 import FileOptions from "./FileOptions";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
+/**
+ * Display a project as a list item
+ * Colums seperated as:
+ * Project name | Date | Favorite button | File options button
+ */
+
 interface Props {
+  //project to be displayed
   project: Project;
   setCurrentProject: (project: Project) => void;
   columns_width: number[];
 }
-
-//Project name | Date | Favorite button | File options button
 
 const ProjectListItem = ({
   project,

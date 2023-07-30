@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Grid,
   GridItem,
@@ -10,13 +9,33 @@ import {
 import { useState } from "react";
 import NodeContainer from "./NodeContainer";
 import useNodeTypes from "../../../hooks/useNodeTypes";
+import useNodeCategories from "../../../hooks/useNodeCategories";
+
+/**
+ * Displayes available nodes to be dragged into the flowchart.
+ * A list of buttons displays the multiple node types.
+ * Divided into:
+ * Header
+ * Buttons with node categories | List of nodes
+ */
 
 const NodeBar = () => {
+  //Category of nodes shown
   const [selectedNodeList, setSelectedNodeList] = useState("data");
 
-  const { data, isLoading, error } = useNodeTypes();
+  //Get list of all nodes [NodeType]
+  const {
+    data: nodeTypeList,
+    isLoading: isLoadongNT,
+    error: errorNT,
+  } = useNodeTypes();
 
-  const nodeCategories = ["data", "model", "attack", "defence", "result"];
+  //Get list of categories of nodes [string]
+  const {
+    data: nodeCategories,
+    isLoading: isLoadingNC,
+    error: errorNC,
+  } = useNodeCategories();
 
   const onDragStart = (
     event: {
@@ -25,7 +44,7 @@ const NodeBar = () => {
         effectAllowed: string;
       };
     },
-    nodeType: any //sry for confusion, this is react node type not the one defined in hook useNodeType
+    nodeType: any //care confusion, this is reactFlow node type not the one defined in hook useNodeType
   ) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.effectAllowed = "move";
@@ -33,9 +52,9 @@ const NodeBar = () => {
   return (
     <aside color="black">
       <Grid
-        templateAreas={`"header header"
-                  "nav main"`}
-        templateColumns={"35% 65%"}
+        templateAreas={`"header header" 
+                  "cat main"`}
+        templateColumns={"35% 65%"} // width division of columns
         templateRows={"60px 1fr"}
       >
         <GridItem area={"header"}>
@@ -43,7 +62,8 @@ const NodeBar = () => {
             Nodes:
           </Heading>
         </GridItem>
-        <GridItem area={"nav"} borderRight={"2px"} paddingRight={2}>
+        {/* Category Buttons, dynamically added from list */}
+        <GridItem area={"cat"} borderRight={"2px"} paddingRight={2}>
           <Stack direction="column" spacing={4} align="left">
             {nodeCategories.map((cat) => (
               <Button
@@ -56,9 +76,10 @@ const NodeBar = () => {
             ))}
           </Stack>
         </GridItem>
+        {/* Different nodes: Dynamically added from list and filtered to match category */}
         <GridItem area={"main"}>
           <VStack spacing={4}>
-            {data
+            {nodeTypeList
               .filter((node) => node.type === selectedNodeList)
               .map((node) => (
                 <NodeContainer nodeType={node} onDragStart={onDragStart} />

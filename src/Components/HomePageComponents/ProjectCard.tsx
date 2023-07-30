@@ -4,6 +4,10 @@ import placeHolderImage from "../../assets/no-image-placeholder-6f3882e0.webp";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import FileOptions from "./FileOptions";
 
+/**
+ * Display a project as a card
+ */
+
 interface Props {
   project: Project;
   setCurrentProject: (project: Project) => void;

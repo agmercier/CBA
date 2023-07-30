@@ -20,8 +20,11 @@ import { Project } from "../hooks/useProjects";
 
 /*
 Cut page into two sections: nav [logo, searchBar, help, settings, profile], aside [new project, home, recent, favorite, trash], main [(Recent projects), filters, all projects]
+The projects can be listed as cards or as listItems. The two views are toggolable with the viewSwitch button
+The list of projects can be filtered and ordered
 */
 
+//object that holds all the filter and order variables
 interface ProjectQuery {
   filter: string;
   order: string;
@@ -36,6 +39,7 @@ const HomePage = ({ setCurrentProject }: Props) => {
   const [projectQuery, setProjectQuery] = useState<ProjectQuery>(
     {} as ProjectQuery
   );
+  //if true: projects listed as cards, if false: Project listed as list items
   const [gridView, setGridView] = useState(true);
   return (
     <Grid
@@ -62,10 +66,8 @@ const HomePage = ({ setCurrentProject }: Props) => {
           <Heading as={"h1"} marginY={5} fontSize={"5xl"}>
             Projects
           </Heading>
-          <HStack
-            marginBottom={2}
-            justifyContent={"space-between"} /* Filters */
-          >
+          <HStack marginBottom={2} justifyContent={"space-between"}>
+            {/* Filters: */}
             <HStack spacing={3}>
               <FilterSelector
                 onSelectFilter={(filter) =>
@@ -79,7 +81,7 @@ const HomePage = ({ setCurrentProject }: Props) => {
                 }
                 selectedOrder={projectQuery.order}
               />
-              <IconButton
+              <IconButton // toggle between ordering by increasing or decreasing
                 icon={
                   projectQuery.increasing ? (
                     <AiOutlineArrowDown />
@@ -87,7 +89,7 @@ const HomePage = ({ setCurrentProject }: Props) => {
                     <AiOutlineArrowUp />
                   )
                 }
-                aria-label={"viewSwitch"}
+                aria-label={"sortOrder"}
                 onClick={() =>
                   setProjectQuery({
                     ...projectQuery,
@@ -96,7 +98,7 @@ const HomePage = ({ setCurrentProject }: Props) => {
                 }
               ></IconButton>
             </HStack>
-            <IconButton
+            <IconButton // toggle between card view or list view
               icon={gridView ? <BsListStars /> : <BsGrid3X2Gap />}
               aria-label={"viewSwitch"}
               onClick={() => setGridView(!gridView)}

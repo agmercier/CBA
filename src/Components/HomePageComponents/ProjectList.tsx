@@ -2,6 +2,10 @@ import { Box, HStack, Heading, List, ListItem } from "@chakra-ui/react";
 import useProjects, { Project } from "../../hooks/useProjects";
 import ProjectListItem from "./ProjectListItem";
 
+/**
+ * Lists projects as list items
+ */
+
 interface Props {
   setCurrentProject: (project: Project) => void;
 }

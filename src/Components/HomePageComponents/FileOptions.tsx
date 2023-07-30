@@ -10,6 +10,10 @@ import { BiDuplicate } from "react-icons/bi";
 import { BsFillPencilFill, BsThreeDotsVertical } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa6";
 
+/**
+ * Drop down with different options to manage a project
+ */
+
 const FileOptions = () => {
   return (
     <Menu>

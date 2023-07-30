@@ -22,10 +22,20 @@ import NodeForm from "./NodeForm";
 import useNodeTypes from "../../../hooks/useNodeTypes";
 import DynamicNode from "./DynamicNode";
 
+/**
+ * Flowchart used to build project pipline
+ * Split into 3 sections
+ * NodeBar | flowchart | NodeForm
+ * NodeBar: Side bar from which nodes can be dragged from
+ * NodeFrom: Appears when a node is double clicked, has inputs for added parameters of the node
+ */
+
+//Node types that can be used in flowchart
 const nodeTypes = {
   dynamic: DynamicNode,
 };
 
+//List of nodes displayed in flowchart
 const initialNodes: Node[] = [];
 const initialEdges: Edge[] = [];
 

@@ -1,5 +1,9 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement } from "react";
+
+/**
+ * Template for drop down menu
+ */
 
 interface Props {
   lable: string;

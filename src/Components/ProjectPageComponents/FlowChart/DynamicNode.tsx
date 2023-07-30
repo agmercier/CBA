@@ -2,6 +2,10 @@ import { Box, Heading } from "@chakra-ui/react";
 import { Handle, Position } from "reactflow";
 import { NodeType } from "../../../hooks/useNodeTypes";
 
+/**
+ * Custom node: every node in flowchart is fitted from this one. Node information is passed through nodeType object in 'data' field
+ */
+
 interface Props {
   data: { lable: string; nodeType: NodeType };
   isConnectable: boolean;
@@ -9,6 +13,8 @@ interface Props {
 const DynamicNode = ({ data, isConnectable }: Props) => {
   return (
     <Box className={"node " + data.nodeType.type}>
+      {/* hande is a connection point 
+      A connection can only be made between a target handle and a source handle*/}
       <Handle
         id="a"
         type="target"

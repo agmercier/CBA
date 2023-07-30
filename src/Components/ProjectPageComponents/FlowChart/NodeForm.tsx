@@ -18,17 +18,29 @@ import { Node } from "@reactflow/core";
 import useForms, { Form } from "../../../hooks/useForms";
 import { BsChevronDown } from "react-icons/bs";
 
+/**
+ * Dynamically display a form passed by the server
+ * Each parameter has an entry in the form which is dynamically assigned
+ * String -> Input
+ * Number -> Number Input
+ * List of options -> Menu's
+ */
+
 interface Props {
+  //node the
   node: Node | null;
 }
 
 const NodeForm = ({ node }: Props) => {
+  //Get all forms
   const { data, isLoading, error } = useForms();
+  //Find the form that matches the node
   const form = data.find((form) => form.nodeType === node?.type);
   return (
     <aside color="black">
       <VStack>
         <Heading marginBottom={4}>{node?.data.label} parameters:</Heading>
+        {/* Map each parameter to an input in the form */}
         {form?.params.map((param) =>
           typeof param.value === "string" ? (
             <Box key={param.key} marginBottom={4}>
@@ -46,7 +58,8 @@ const NodeForm = ({ node }: Props) => {
                 </NumberInputStepper>
               </NumberInput>
             </Box>
-          ) : typeof param.value === "object" && param.value.length !== 0 ? (
+          ) : /* If is an array with options inside*/
+          typeof param.value === "object" && param.value.length !== 0 ? (
             <Menu key={param.key}>
               <MenuButton
                 as={Button}

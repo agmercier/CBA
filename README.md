@@ -1,5 +1,5 @@
 # Run
-in terminal run:
+in terminal run://
 `npm i` to install modules and nodes
 `npm run dev` to start in dev mode
 `npm build` to build
